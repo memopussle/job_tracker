@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem, ListItemText, Typography } from "@material-ui/core";
+import { ListItem, ListItemText } from "@material-ui/core";
 
 const NavItem = ({ category }) => {
    
