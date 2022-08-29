@@ -7,6 +7,7 @@ const jobSchema = mongoose.Schema({
   phone_number: String,
   address: String,
   email: String,
+  status: String,
   created: {
     type: Date,
     default: new Date(),

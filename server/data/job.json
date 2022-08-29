@@ -6,7 +6,8 @@
     "phone_number": "0212-872-689",
     "address": "Oakwood Grv Paraparaumu Beach Paraparaumu",
     "created": "2022-06-10T02:00:00Z",
-    "email": "John.Doe@gmail.com"
+    "email": "John.Doe@gmail.com",
+    "status": "scheduled"
   },
   {
     "client": "Mark Doe",
@@ -15,6 +16,7 @@
     "phone_number": "0212-872-689",
     "address": "Davita Pl Farm Cove Auckland",
     "created": "2022-06-12T09:00:00Z",
-    "email": "Mark.tradie@gmail.com"
+    "email": "Mark.tradie@gmail.com",
+    "status": "invoicing"
   }
 ]
