@@ -8,12 +8,17 @@ import {
   Typography,
   Grid,
   Avatar,
-    CardHeader,
-  IconButton
+  CardHeader,
+    IconButton,
+  Box
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { formatDate } from "../../utils/formatDate";
+import CommentIcon from "@material-ui/icons/Comment";
+import useStyles from "./styles";
 
 const JobList = () => {
+     const classes = useStyles();
   const {
     data: jobs,
     isLoading: isGetLoading,
@@ -22,74 +27,94 @@ const JobList = () => {
     isSuccess: isGetSuccess,
   } = useGetJobsQuery();
   console.log(jobs);
-  return (
-    <>
-      <Grid container spacing={2}>
-        {jobs?.map(
-          ({
-            _id,
-            title,
-            client,
-            job_description,
-            address,
-            email,
-            phone_number,
-            created,
-          }) => (
-            <Grid item xs={12} md={6} xl={4}>
-              <Card key={_id} elevation={2}>
-                <CardHeader
-                  avatar={<Avatar color="inherit">R</Avatar>}
-                  title={client}
-                  subheader={created}
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                />
 
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                    {title}
-                  </Typography>
+  if (isGetLoading) {
+    return (
+      <Typography variant="body2" align="center">
+        Loading...
+      </Typography>
+    );
+  } else if (isGetError) {
+    return <div>{getError}</div>;
+  } else if (isGetSuccess) {
+      return (
+        
+      <>
+        <Grid container spacing={2}>
+          {jobs?.map(
+            ({
+              _id,
+              title,
+              client,
+              job_description,
+              address,
+              email,
+              phone_number,
+              created,
+              status,
+            }) => (
+              <Grid item xs={12} md={6} xl={4}>
+                <Card key={_id} elevation={2}>
+                  <CardHeader
+                    avatar={
+                      <Avatar color="inherit">{client.slice(0, 1)}</Avatar>
+                    }
+                    title={client}
+                    subheader={formatDate(created)}
+                    action={
+                      <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                  />
 
-                  <Typography variant="body2" component="p">
-                    Description: {job_description}
-                  </Typography>
-                  <Typography>Contact details:</Typography>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                    component="p"
-                  >
-                    {phone_number}
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                    component="p"
-                  >
-                    {address}
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                    component="p"
-                  >
-                    {email}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          )
-        )}
-      </Grid>
-    </>
-  );
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      {title}
+                    </Typography>
+
+                    <Typography variant="body1" component="p">
+                      Description: {job_description}
+                    </Typography>
+
+                    <Typography
+                      color="textSecondary"
+                      variant="body2"
+                      component="p"
+                    >
+                      Phone Number: {phone_number}
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="body2"
+                      component="p"
+                    >
+                      Address: {address}
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="body2"
+                      component="p"
+                    >
+                      Email: {email}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.action}>
+                      <Button size="large" variant="outlined" color="primary">
+                        {status}
+                      </Button>
+                      <CommentIcon color="primary" />
+                    </Box>
+                  </CardActions>
+                </Card>
+              </Grid>
+            )
+          )}
+        </Grid>
+      </>
+    );
+  }
 };
 
 export default JobList;
