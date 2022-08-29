@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetJobsQuery } from "../../features/api/apiSlice";
 import {
   Card,
@@ -9,16 +9,20 @@ import {
   Grid,
   Avatar,
   CardHeader,
-    IconButton,
-  Box
+  IconButton,
+  Box,
+
+ 
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { formatDate } from "../../utils/formatDate";
 import CommentIcon from "@material-ui/icons/Comment";
 import useStyles from "./styles";
+import FilterSort from "../FilterSort.js/FilterSort";
+
 
 const JobList = () => {
-     const classes = useStyles();
+  const classes = useStyles();
   const {
     data: jobs,
     isLoading: isGetLoading,
@@ -27,6 +31,7 @@ const JobList = () => {
     isSuccess: isGetSuccess,
   } = useGetJobsQuery();
   console.log(jobs);
+
 
   if (isGetLoading) {
     return (
@@ -37,9 +42,9 @@ const JobList = () => {
   } else if (isGetError) {
     return <div>{getError}</div>;
   } else if (isGetSuccess) {
-      return (
-        
+    return (
       <>
+        <FilterSort />
         <Grid container spacing={2}>
           {jobs?.map(
             ({
@@ -100,7 +105,12 @@ const JobList = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.action}>
+                    <Box
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      className={classes.action}
+                    >
                       <Button size="large" variant="outlined" color="primary">
                         {status}
                       </Button>
