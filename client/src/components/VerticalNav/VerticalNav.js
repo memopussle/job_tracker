@@ -8,16 +8,16 @@ const VerticalNav = () => {
 
   return (
     <List component="nav" aria-label="mailbox folders" className={classes.root}>
-      <NavItem category="All" />
+      <NavItem category="All" to="/" />
 
-      <NavItem category="Scheduled" />
+      <NavItem category="Scheduled" to="/" />
 
-      <NavItem category="Active" />
+      <NavItem category="Active" to="/" />
 
-      <NavItem category="Invoicing" />
-      <NavItem category="To priced" />
-      <NavItem category="Completed" />
-      <NavItem category="Add a new job" />
+      <NavItem category="Invoicing" to="/" />
+      <NavItem category="To priced" to="/" />
+      <NavItem category="Completed" to="/" />
+      <NavItem category="Add a new job" to="/addjob" />
     </List>
   );
 };

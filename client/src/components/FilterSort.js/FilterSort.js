@@ -48,6 +48,12 @@ const FilterSort = () => {
         <MenuItem>
           <ListItemText primary="Invoicing" />
         </MenuItem>
+        <MenuItem>
+          <ListItemText primary="To priced" />
+        </MenuItem>
+        <MenuItem>
+          <ListItemText primary="Completed" />
+        </MenuItem>
       </Menu>
 
       <Button
@@ -70,8 +76,6 @@ const FilterSort = () => {
         <MenuItem>
           <ListItemText primary="Oldest" />
         </MenuItem>
-
-     
       </Menu>
     </div>
   );
