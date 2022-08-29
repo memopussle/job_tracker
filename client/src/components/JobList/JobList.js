@@ -56,8 +56,8 @@ const JobList = () => {
                 created,
                 status,
               }) => (
-                <Grid item xs={12} md={6}>
-                  <Card key={_id} elevation={2}>
+                <Grid item xs={12} md={6} key={_id}>
+                  <Card elevation={2}>
                     <CardHeader
                       avatar={
                         <Avatar className={classes.avatar}>
