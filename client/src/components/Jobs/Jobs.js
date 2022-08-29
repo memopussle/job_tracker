@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import useStyles from "./styles.js";
-import { VerticalNav } from "../index";
+import { VerticalNav, JobList } from "../index";
 
 const Jobs = () => {
   const classes = useStyles();
@@ -12,7 +12,7 @@ const Jobs = () => {
           <VerticalNav />
         </Grid>
         <Grid item xs={8} md={9}>
-          Content
+          <JobList />
         </Grid>
       </Grid>
     </>
