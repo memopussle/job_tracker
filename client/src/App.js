@@ -12,19 +12,28 @@ const App = () => {
   return (
     <>
       <Navbar />
-    
-        <Grid container className={classes.grid}>
-          <Grid item xs={0} sm={2} md={3}>
-            <VerticalNav />
-          </Grid>
-          <Grid item xs={11} sm={10} md={9}>
-            <Routes>
-            <Route path="/" element={<JobList currentId={currentId} setCurrentId={setCurrentId} />} />
-              <Route path="/addjob" element={<NewJob />} />
-            </Routes>
-          </Grid>
+
+      <Grid container className={classes.grid}>
+        <Grid item xs={0} sm={2} md={3}>
+          <VerticalNav />
         </Grid>
-     
+        <Grid item xs={11} sm={10} md={9}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <JobList setCurrentId={setCurrentId} />
+              }
+            />
+            <Route
+              path="/addjob"
+              element={
+                <NewJob currentId={currentId} />
+              }
+            />
+          </Routes>
+        </Grid>
+      </Grid>
     </>
   );
 }

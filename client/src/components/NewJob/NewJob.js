@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Container,
@@ -10,11 +10,27 @@ import {
   Box,
 } from "@material-ui/core";
 import useStyles from "./styles";
-import { useAddJobsMutation } from "../../features/api/apiSlice";
+import {
+  useAddJobsMutation,
+  useUpdateJobsMutation,
+  useGetJobsQuery,
+} from "../../features/api/apiSlice";
 
-const NewJob = () => {
+const NewJob = ({ currentId }) => {
+  console.log(currentId);
   const classes = useStyles();
- 
+  const { data: jobs } = useGetJobsQuery();
+  console.log(jobs);
+
+  const [updateJob] = useUpdateJobsMutation();
+  // find item has current Id
+  const chosenJob = jobs?.find((job) => job._id === currentId);
+
+  useEffect(() => {
+    if (chosenJob) {
+      setNewJob(chosenJob);
+    }
+  }, []);
   const [newJob, setNewJob] = useState({
     client: "",
     title: "",
@@ -25,7 +41,7 @@ const NewJob = () => {
     email: "",
     status: "",
   });
- const [addJob] = useAddJobsMutation(newJob);
+  const [addJob] = useAddJobsMutation(newJob);
   const handleChange = (e) => {
     setNewJob({ ...newJob, [e.target.name]: e.target.value });
   };
@@ -34,7 +50,11 @@ const NewJob = () => {
     e.preventDefault();
 
     console.log(newJob);
-    addJob(newJob);
+    if (currentId) {
+      updateJob({ ...newJob, [e.target.name]: e.target.value });
+    } else {
+      addJob(newJob);
+    }
 
     clear();
   };

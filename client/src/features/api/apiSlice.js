@@ -21,7 +21,7 @@ export const apiSlice = createApi({
     }),
     updateJobs: builder.mutation({
       query: (job) => ({
-        url: `tours/${job._id}`,
+        url: `/jobs/${job._id}`,
         method: "PATCH",
         body: job,
       }),
