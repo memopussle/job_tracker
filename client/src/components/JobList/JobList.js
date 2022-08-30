@@ -22,7 +22,7 @@ import { filterByCategory, sortByDate, Sort, Filter } from "../index";
 
 
 
-const JobList = () => {
+const JobList = ({setCurrentId}) => {
   const classes = useStyles();
   const location = useLocation();
 
@@ -42,7 +42,6 @@ const JobList = () => {
 
 
    const [filterJobs, setFilterJobs] = useState([]);
-  console.log(filterJobs)
 
   useEffect(() => {
     const filtered = filterByCategory(jobs, filterBy);
@@ -155,7 +154,7 @@ const JobList = () => {
                           >
                             {status}
                           </Button>
-                          <CommentIcon color="primary" />
+                          <CommentIcon color="primary" onClick={() => setCurrentId(_id)}  />
                         </Box>
                       </CardActions>
                     </Card>

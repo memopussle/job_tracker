@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormControl, MenuItem, InputLabel, Select } from "@material-ui/core";
 
 const FilterSort = ({ filterBy, handleChange }) => {

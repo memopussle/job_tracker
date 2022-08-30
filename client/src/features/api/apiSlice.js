@@ -19,6 +19,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Job"],
     }),
+    updateJobs: builder.mutation({
+      query: (job) => ({
+        url: `tours/${job._id}`,
+        method: "PATCH",
+        body: job,
+      }),
+      invalidatesTags: ["Job"],
+    }),
   }),
 });
-export const { useGetJobsQuery, useAddJobsMutation } = apiSlice;
+export const { useGetJobsQuery, useAddJobsMutation, useUpdateJobsMutation} = apiSlice;
