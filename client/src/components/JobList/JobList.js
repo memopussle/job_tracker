@@ -17,9 +17,10 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { formatDate } from "../../utils/formatDate";
 import CommentIcon from "@material-ui/icons/Comment";
 import useStyles from "./styles";
-import FilterSort from "../FilterSort.js/FilterSort";
 import { useLocation } from "react-router-dom";
-import filterByCategory from "../../utils/filterByCategory";
+import { filterByCategory, sortByDate, Sort, Filter } from "../index";
+
+
 
 const JobList = () => {
   const classes = useStyles();
@@ -34,23 +35,30 @@ const JobList = () => {
   } = useGetJobsQuery();
   
 
+
   //filter and sort
   const [filterBy, setFilterBy] = useState("all");
-  const [newJobList, setNewJobList] = useState(jobs)
-  console.log(filterBy)
+  const [sortBy, setSortBy] = useState("newest");
 
-  
+
+   const [filterJobs, setFilterJobs] = useState([]);
+  console.log(filterJobs)
+
   useEffect(() => {
+    const filtered = filterByCategory(jobs, filterBy);
+    const sorted = sortByDate(filtered, sortBy)
+    setFilterJobs(sorted);
 
-    const filtered = filterByCategory(jobs, filterBy)
-    
-    setNewJobList(filtered)
-  }, [filterBy])
-
+  }, [filterBy, sortBy, jobs]);
 
   const handleChange = (event) => {
     setFilterBy(event.target.value);
   };
+
+  const handleSort = (event) => {
+    setSortBy(event.target.value);
+  }
+
 
   if (isGetLoading) {
     return (
@@ -64,90 +72,97 @@ const JobList = () => {
     return (
       <>
         <Container>
-          <FilterSort filterBy={filterBy} handleChange={handleChange} />
+          <Filter filterBy={filterBy} handleChange={handleChange} />
+          <Sort sortBy={sortBy} handleSort={handleSort} />
           <Grid container spacing={2}>
-            {jobs && newJobList?.map(
-              ({
-                _id,
-                title,
-                client,
-                job_description,
-                address,
-                email,
-                phone_number,
-                created,
-                status,
-              }) => (
-                <Grid item xs={12} md={6} key={_id}>
-                  <Card elevation={2}>
-                    <CardHeader
-                      avatar={
-                        <Avatar className={classes.avatar}>
-                          {client.slice(0, 1)}
-                        </Avatar>
-                      }
-                      title={client}
-                      subheader={formatDate(created)}
-                      action={
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
-                      }
-                    />
+         
+              {filterJobs?.map(
+                ({
+                  _id,
+                  title,
+                  client,
+                  job_description,
+                  address,
+                  email,
+                  phone_number,
+                  created,
+                  status,
+                }) => (
+                  <Grid item xs={12} md={6} key={_id}>
+                    <Card elevation={2}>
+                      <CardHeader
+                        avatar={
+                          <Avatar className={classes.avatar}>
+                            {client.slice(0, 1)}
+                          </Avatar>
+                        }
+                        title={client}
+                        subheader={formatDate(created)}
+                        action={
+                          <IconButton aria-label="settings">
+                            <MoreVertIcon />
+                          </IconButton>
+                        }
+                      />
 
-                    <CardContent>
-                      <Typography variant="h5" component="h2">
-                        {title}
-                      </Typography>
+                      <CardContent>
+                        <Typography variant="h5" component="h2">
+                          {title}
+                        </Typography>
 
-                      <Typography variant="body1" component="p">
-                        Description:
-                        {location.pathname === "/"
-                          ? job_description
-                              .slice(0, 100)
-                              .concat("...(see more)")
-                          : job_description}
-                      </Typography>
+                        <Typography variant="body1" component="p">
+                          Description:
+                          {location.pathname === "/"
+                            ? job_description
+                                .slice(0, 100)
+                                .concat("...(see more)")
+                            : job_description}
+                        </Typography>
 
-                      <Typography
-                        color="textSecondary"
-                        variant="body2"
-                        component="p"
-                      >
-                        Phone number: {phone_number}
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="body2"
-                        component="p"
-                      >
-                        Address: {address}
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="body2"
-                        component="p"
-                      >
-                        Email: {email}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Box
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        className={classes.action}
-                      >
-                        <Button size="large" variant="outlined" color="primary">
-                          {status}
-                        </Button>
-                        <CommentIcon color="primary" />
-                      </Box>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              )
-            )}
+                        <Typography
+                          color="textSecondary"
+                          variant="body2"
+                          component="p"
+                        >
+                          Phone number: {phone_number}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="body2"
+                          component="p"
+                        >
+                          Address: {address}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="body2"
+                          component="p"
+                        >
+                          Email: {email}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          className={classes.action}
+                        >
+                          <Button
+                            size="large"
+                            variant="outlined"
+                            color="primary"
+                          >
+                            {status}
+                          </Button>
+                          <CommentIcon color="primary" />
+                        </Box>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                )
+              )}
+           
           </Grid>
         </Container>
       </>
