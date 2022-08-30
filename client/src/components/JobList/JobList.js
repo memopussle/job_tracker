@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGetJobsQuery } from "../../features/api/apiSlice";
 import {
   Card,
@@ -18,9 +18,12 @@ import { formatDate } from "../../utils/formatDate";
 import CommentIcon from "@material-ui/icons/Comment";
 import useStyles from "./styles";
 import FilterSort from "../FilterSort.js/FilterSort";
+import { useLocation } from "react-router-dom";
 
 const JobList = () => {
   const classes = useStyles();
+  const location = useLocation();
+
   const {
     data: jobs,
     isLoading: isGetLoading,
@@ -28,7 +31,24 @@ const JobList = () => {
     error: getError,
     isSuccess: isGetSuccess,
   } = useGetJobsQuery();
-  console.log(jobs);
+
+  const [newJob, setNewJob] = useState(jobs);
+
+  //filter and sort
+  const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+     filter === "all"
+       ? setNewJob(jobs)
+       : setNewJob(jobs?.filter((job) => job?.status === filter));
+  }, [])
+
+  const handleChange = (event) => {
+    setFilter(event.target.value);
+    filter === "all"
+      ? setNewJob(jobs)
+      : setNewJob(jobs.filter((job) => job.status === filter));
+  };
 
   if (isGetLoading) {
     return (
@@ -42,9 +62,9 @@ const JobList = () => {
     return (
       <>
         <Container>
-          <FilterSort />
-          <Grid container spacing={2} ml={3}>
-            {jobs?.map(
+          <FilterSort filter={filter} handleChange={handleChange} />
+          <Grid container spacing={2}>
+            {newJob?.map(
               ({
                 _id,
                 title,
@@ -79,7 +99,12 @@ const JobList = () => {
                       </Typography>
 
                       <Typography variant="body1" component="p">
-                        Description: {job_description}
+                        Description:
+                        {location.pathname === "/"
+                          ? job_description
+                              .slice(0, 100)
+                              .concat("...(see more)")
+                          : job_description}
                       </Typography>
 
                       <Typography

@@ -1,83 +1,27 @@
 import React, { useState } from "react";
-import { Button, ListItemText, Menu, MenuItem, Box } from "@material-ui/core";
+import {FormControl, MenuItem, InputLabel, Select } from "@material-ui/core";
 
-const FilterSort = () => {
-  const [filter, setFilter] = useState(null);
-  const [sort, setSort] = useState(null);
-
-  const handleClickFilter = (event) => {
-    setFilter(event.currentTarget);
-  };
-
-  const handleClickSort = (event) => {
-    setSort(event.currentTarget);
-  };
-
-  const handleCloseFilter = () => {
-    setFilter(null);
-  };
-  const handleCloseSort = () => {
-    setSort(null);
-  };
+const FilterSort = ({filter, handleChange}) => {
+ 
+console.log(filter)
   return (
-    <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleClickFilter}
-        size="large"
+    <FormControl>
+      <InputLabel>Filter</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={filter}
+        onChange={handleChange}
       >
-        Filter
-      </Button>
-      <Menu
-        anchorEl={filter}
-        keepMounted
-        open={Boolean(filter)}
-        onClose={handleCloseFilter}
-      >
-        <MenuItem>
-          <ListItemText primary="All" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemText primary="Scheduled" />
-        </MenuItem>
+        <MenuItem value="all">All</MenuItem>
+        <MenuItem value="scheduled">Scheduled</MenuItem>
+        <MenuItem value="active">Active</MenuItem>
+        <MenuItem value="invoicing">Invoicing</MenuItem>
+        <MenuItem value="toPriced">To Priced</MenuItem>
+        <MenuItem value="completed">Completed</MenuItem>
+      </Select>
+    </FormControl>
 
-        <MenuItem>
-          <ListItemText primary="Active" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemText primary="Invoicing" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemText primary="To priced" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemText primary="Completed" />
-        </MenuItem>
-      </Menu>
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleClickSort}
-        size="large"
-      >
-        Sort
-      </Button>
-      <Menu
-        anchorEl={sort}
-        keepMounted
-        open={Boolean(sort)}
-        onClose={handleCloseSort}
-      >
-        <MenuItem>
-          <ListItemText primary="Newest" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemText primary="Oldest" />
-        </MenuItem>
-      </Menu>
-    </div>
   );
 };
 export default FilterSort;
