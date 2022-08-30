@@ -19,6 +19,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 import useStyles from "./styles";
 import FilterSort from "../FilterSort.js/FilterSort";
 import { useLocation } from "react-router-dom";
+import filterByCategory from "../../utils/filterByCategory";
 
 const JobList = () => {
   const classes = useStyles();
@@ -31,23 +32,24 @@ const JobList = () => {
     error: getError,
     isSuccess: isGetSuccess,
   } = useGetJobsQuery();
-
-  const [newJob, setNewJob] = useState(jobs);
+  
 
   //filter and sort
-  const [filter, setFilter] = useState("all");
+  const [filterBy, setFilterBy] = useState("all");
+  const [newJobList, setNewJobList] = useState(jobs)
+  console.log(filterBy)
 
+  
   useEffect(() => {
-     filter === "all"
-       ? setNewJob(jobs)
-       : setNewJob(jobs?.filter((job) => job?.status === filter));
-  }, [])
+
+    const filtered = filterByCategory(jobs, filterBy)
+    
+    setNewJobList(filtered)
+  }, [filterBy])
+
 
   const handleChange = (event) => {
-    setFilter(event.target.value);
-    filter === "all"
-      ? setNewJob(jobs)
-      : setNewJob(jobs.filter((job) => job.status === filter));
+    setFilterBy(event.target.value);
   };
 
   if (isGetLoading) {
@@ -62,9 +64,9 @@ const JobList = () => {
     return (
       <>
         <Container>
-          <FilterSort filter={filter} handleChange={handleChange} />
+          <FilterSort filterBy={filterBy} handleChange={handleChange} />
           <Grid container spacing={2}>
-            {newJob?.map(
+            {jobs && newJobList?.map(
               ({
                 _id,
                 title,
