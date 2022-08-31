@@ -54,7 +54,7 @@ export const updateJob = async (req, res) => {
   const { id: _id } = req.params; // rename id -> _id
 
   const job = req.body;
-console.log(job)
+
   //if id is not valid
   if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(404).send("No post with that id");

@@ -8,6 +8,7 @@ import {
   Button,
   Grid,
   Box,
+  Typography,
 } from "@material-ui/core";
 import useStyles from "./styles";
 import {
@@ -20,7 +21,7 @@ const NewJob = ({ currentId }) => {
   console.log(currentId);
   const classes = useStyles();
   const { data: jobs } = useGetJobsQuery();
-  console.log(jobs);
+
 
   const [updateJob] = useUpdateJobsMutation();
   // find item has current Id
@@ -74,6 +75,7 @@ const NewJob = ({ currentId }) => {
   return (
     <>
       <Container>
+        <Typography variant="h5">{currentId ? "Edit" : "Add "} A job</Typography>
         <form
           onSubmit={handleSubmit}
           className={`${classes.root} ${classes.form}`}
@@ -169,6 +171,16 @@ const NewJob = ({ currentId }) => {
             className={classes.submit}
           >
             Submit
+          </Button>
+          <Button
+            size="large"
+            variant="outlined"
+            color="primary"
+            type="submit"
+            className={classes.submit}
+            onClick={() => clear()}
+          >
+            Clear
           </Button>
         </form>
       </Container>

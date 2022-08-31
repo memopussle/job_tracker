@@ -20,9 +20,10 @@ import useStyles from "./styles";
 import { useLocation } from "react-router-dom";
 import { filterByCategory, sortByDate, Sort, Filter } from "../index";
 import { Link } from "react-router-dom";
+import StatusButton from "../StatusButton.js/StatusButton";
 
 
-const JobList = ({setCurrentId}) => {
+const JobList = ({setCurrentId }) => {
   const classes = useStyles();
   const location = useLocation();
 
@@ -85,7 +86,7 @@ const JobList = ({setCurrentId}) => {
                 phone_number,
                 created,
                 status,
-              }) => (
+              }, i) => (
                 <Grid item xs={12} md={6} key={_id}>
                   <Card elevation={2}>
                     <CardHeader
@@ -101,7 +102,7 @@ const JobList = ({setCurrentId}) => {
                           <Link to="/addjob">
                             <MoreVertIcon
                               onClick={() => setCurrentId(_id)}
-                             color="primary"
+                              color="primary"
                             />
                           </Link>
                         </IconButton>
@@ -151,13 +152,14 @@ const JobList = ({setCurrentId}) => {
                         alignItems="center"
                         className={classes.action}
                       >
-                        <Button size="large" variant="outlined" color="primary">
-                          {status}
-                        </Button>
-                        <CommentIcon
-                          color="primary"
-                          style={{ cursor: "pointer" }}
-                        />
+                        
+                        <StatusButton status={status} currentId={_id} jobs={jobs} i={i} />
+                          
+                          <CommentIcon
+                            color="primary"
+                            style={{ cursor: "pointer" }}
+                          />
+                        
                       </Box>
                     </CardActions>
                   </Card>

@@ -5,10 +5,12 @@ export default makeStyles((theme) => ({
     "& .MuiTextField-root": {
       margin: theme.spacing(0.5),
         },
-      marginTop: "2rem"
+    marginTop: "2rem",
+      
     },
     submit: {
-        marginTop: "0.5rem"
+      marginTop: "0.5rem",
+      marginRight: "0.5rem"
     }
 
 }));
