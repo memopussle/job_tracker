@@ -10,11 +10,11 @@ const VerticalNav = ({ setCurrentId}) => {
     <List component="nav" aria-label="mailbox folders" className={classes.root}>
       <NavItem category="All" to="/" />
 
-      <NavItem category="Scheduled" to="/" />
+      <NavItem category="Scheduled" to="/scheduled" />
 
-      <NavItem category="Active" to="/" />
+      <NavItem category="Active" to="/active" />
 
-      <NavItem category="Invoicing" to="/" />
+      <NavItem category="Invoicing" to="/invoicing" />
       <NavItem category="To priced" to="/" />
       <NavItem category="Completed" to="/" />
       <NavItem

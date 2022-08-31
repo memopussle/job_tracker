@@ -18,7 +18,6 @@ import {
 } from "../../features/api/apiSlice";
 
 const NewJob = ({ currentId }) => {
-  console.log(currentId);
   const classes = useStyles();
   const { data: jobs } = useGetJobsQuery();
 

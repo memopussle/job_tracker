@@ -1,15 +1,25 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { NewJob, Navbar, VerticalNav, JobList } from "./components/index";
-import {  Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import useStyles from "./styles";
-
 
 const App = () => {
   const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
 
-console.log(currentId)
+  console.log(currentId);
+  const pathNames = [
+    "/",
+    "/scheduled",
+    "/active",
+    "/invoicing",
+    "toPriced",
+    "completed",
+  ];
+
+  console.log(currentId);
+
   return (
     <>
       <Navbar />
@@ -20,6 +30,16 @@ console.log(currentId)
         </Grid>
         <Grid item xs={11} sm={10} md={9}>
           <Routes>
+            {pathNames.map((pathName, i) => (
+              <Route
+                key={i}
+                path={pathName}
+                element={<JobList setCurrentId={setCurrentId} />}
+              />
+            ))}
+
+            <Route path="/addjob" element={<NewJob currentId={currentId} />} />
+
             <Route path="/" element={<JobList setCurrentId={setCurrentId} />} />
             <Route path="/addjob" element={<NewJob currentId={currentId} />} />
           </Routes>
@@ -27,6 +47,6 @@ console.log(currentId)
       </Grid>
     </>
   );
-}
+};
 
 export default App;
