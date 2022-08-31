@@ -15,7 +15,7 @@ const StatusButton = ({ status, currentId, jobs, i }) => {
   };
 
   useEffect(() => {
-    if (childClicked) {
+    if (childClicked >= 0) {
       // find the job matches with current id
       const chosenJob = jobs?.find((job) => {
         return job._id === currentId;
@@ -23,7 +23,6 @@ const StatusButton = ({ status, currentId, jobs, i }) => {
 
       // update status of the job
       updateJob({ ...chosenJob, status: value });
-      console.log(chosenJob);
     }
   }, [childClicked, currentId, jobs, value]);
 

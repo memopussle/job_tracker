@@ -15,8 +15,8 @@ const VerticalNav = ({ setCurrentId}) => {
       <NavItem category="Active" to="/active" />
 
       <NavItem category="Invoicing" to="/invoicing" />
-      <NavItem category="To priced" to="/" />
-      <NavItem category="Completed" to="/" />
+      <NavItem category="To priced" to="/topriced" />
+      <NavItem category="Completed" to="/completed" />
       <NavItem
         category="Add a new job"
         to="/addjob"

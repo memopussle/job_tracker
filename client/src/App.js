@@ -14,8 +14,8 @@ const App = () => {
     "/scheduled",
     "/active",
     "/invoicing",
-    "toPriced",
-    "completed",
+    "/topriced",
+    "/completed",
   ];
 
   console.log(currentId);
