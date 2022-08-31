@@ -1,18 +1,26 @@
 const filterRoute = (pathname, filterJobs) => {
-    let filteredJobs;
-if (pathname === "/") {
-    return filteredJobs = filterJobs;
-  } else if (pathname === "/scheduled") {
-    return filteredJobs = filterJobs.filter((job) => job.status === "scheduled");
-  } else if (pathname === "/active") {
-   return  filteredJobs = filterJobs.filter((job) => job.status === "active");
-  } else if (pathname === "/invoicing") {
-    return filteredJobs = filterJobs.filter((job) => job.status === "invoicing");
-  } else if (pathname === "/topriced") {
-    return filteredJobs = filterJobs.filter((job) => job.status === "toPriced");
-  } else if (pathname === "/completed") { 
-     return filteredJobs = filterJobs.filter((job) => job.status === "completed");
-  }
-}
+  let filteredJobs;
+  switch (pathname) {
+    case "/":
+      filteredJobs = filterJobs;
+      break;
+    case "/scheduled":
+      filteredJobs = filterJobs.filter((job) => job.status === "scheduled");
+      break;
+    case "/active":
+      filteredJobs = filterJobs.filter((job) => job.status === "active");
+      break;
+    case "/invoicing":
+      filteredJobs = filterJobs.filter((job) => job.status === "invoicing");
+      break;
+    case "/topriced":
+      filteredJobs = filterJobs.filter((job) => job.status === "toPriced");
+      break;
+    case "/completed":
+      filteredJobs = filterJobs.filter((job) => job.status === "completed");
+      break;
+    }
+    return filteredJobs;
+};
 
 export default filterRoute;
