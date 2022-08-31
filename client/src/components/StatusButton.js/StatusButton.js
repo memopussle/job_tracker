@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FormControl, Select, MenuItem } from "@material-ui/core";
 import { useUpdateJobsMutation } from "../../features/api/apiSlice";
 
@@ -7,13 +7,11 @@ const StatusButton = ({ status, currentId, jobs, i }) => {
 
   const [childClicked, setChildClicked] = useState(null);
   const [updateJob] = useUpdateJobsMutation();
-  
 
   const handleChange = (event) => {
     setChildClicked(i);
     event.preventDefault();
     setValue(event.target.value);
-  
   };
 
   useEffect(() => {
@@ -23,12 +21,11 @@ const StatusButton = ({ status, currentId, jobs, i }) => {
         return job._id === currentId;
       });
 
-
-        updateJob({ ...chosenJob, status: value });
-       console.log(chosenJob)
+      // update status of the job
+      updateJob({ ...chosenJob, status: value });
+      console.log(chosenJob);
     }
   }, [childClicked, currentId, jobs, value]);
-
 
   return (
     <>

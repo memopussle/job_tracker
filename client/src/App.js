@@ -8,29 +8,20 @@ import useStyles from "./styles";
 const App = () => {
   const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
-  console.log(currentId)
+
+console.log(currentId)
   return (
     <>
       <Navbar />
 
       <Grid container className={classes.grid}>
         <Grid item xs={0} sm={2} md={3}>
-          <VerticalNav />
+          <VerticalNav setCurrentId={setCurrentId} />
         </Grid>
         <Grid item xs={11} sm={10} md={9}>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <JobList setCurrentId={setCurrentId} />
-              }
-            />
-            <Route
-              path="/addjob"
-              element={
-                <NewJob currentId={currentId} />
-              }
-            />
+            <Route path="/" element={<JobList setCurrentId={setCurrentId} />} />
+            <Route path="/addjob" element={<NewJob currentId={currentId} />} />
           </Routes>
         </Grid>
       </Grid>

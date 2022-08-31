@@ -2,7 +2,6 @@ import Job from "../models/jobs.js";
 import express from "express";
 import mongoose from "mongoose";
 
-
 const router = express.Router();
 
 // get all the jobs
@@ -40,13 +39,13 @@ export const createJob = async (req, res) => {
     status,
   });
 
-   try {
-     await newJob.save();
+  try {
+    await newJob.save();
 
-     res.status(201).send(newJob);
-   } catch (error) {
-     res.status(409).send({ message: error.message });
-   }
+    res.status(201).send(newJob);
+  } catch (error) {
+    res.status(409).send({ message: error.message });
+  }
 };
 
 //update a job
@@ -67,3 +66,13 @@ export const updateJob = async (req, res) => {
   res.send(updatedJob);
 };
 
+// delete a job
+export const deleteJob = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No Job with that id");
+
+  await Job.findByIdAndRemove(id);
+
+  res.send({ message: "Post deleted sucessfully" });
+};

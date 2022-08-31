@@ -50,7 +50,6 @@ const NewJob = ({ currentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(newJob);
     if (currentId) {
       updateJob({ ...newJob, [e.target.name]: e.target.value });
     } else {
@@ -75,7 +74,7 @@ const NewJob = ({ currentId }) => {
   return (
     <>
       <Container>
-        <Typography variant="h5">{currentId ? "Edit" : "Add "} A job</Typography>
+        <Typography variant="h5">{currentId ? "Edit" : "Add "} a job</Typography>
         <form
           onSubmit={handleSubmit}
           className={`${classes.root} ${classes.form}`}

@@ -3,7 +3,7 @@ import { List } from "@material-ui/core";
 import useStyles from "./styles.js";
 import NavItem from "./NavItem.js";
 
-const VerticalNav = () => {
+const VerticalNav = ({ setCurrentId}) => {
   const classes = useStyles();
 
   return (
@@ -17,7 +17,14 @@ const VerticalNav = () => {
       <NavItem category="Invoicing" to="/" />
       <NavItem category="To priced" to="/" />
       <NavItem category="Completed" to="/" />
-      <NavItem category="Add a new job" to="/addjob" />
+      <NavItem
+        category="Add a new job"
+        to="/addjob"
+        setCurrentId={() => {
+          setCurrentId(null);
+        
+        }}
+      />
     </List>
   );
 };

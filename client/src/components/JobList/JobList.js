@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useGetJobsQuery } from "../../features/api/apiSlice";
+import { useGetJobsQuery,useDeleteJobsMutation } from "../../features/api/apiSlice";
 import {
   Card,
   CardActions,
   CardContent,
-  Button,
   Typography,
   Grid,
   Avatar,
@@ -21,7 +20,8 @@ import { useLocation } from "react-router-dom";
 import { filterByCategory, sortByDate, Sort, Filter } from "../index";
 import { Link } from "react-router-dom";
 import StatusButton from "../StatusButton.js/StatusButton";
-
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
 const JobList = ({setCurrentId }) => {
   const classes = useStyles();
@@ -35,7 +35,7 @@ const JobList = ({setCurrentId }) => {
     isSuccess: isGetSuccess,
   } = useGetJobsQuery();
   
-
+  const [deleteJob] = useDeleteJobsMutation();
 
   //filter and sort
   const [filterBy, setFilterBy] = useState("all");
@@ -62,12 +62,12 @@ const JobList = ({setCurrentId }) => {
 
   if (isGetLoading) {
     return (
-      <Typography variant="body2" align="center">
-        Loading...
-      </Typography>
+      <Box display="flex" justifyContent="center">
+        <CircularProgress />
+      </Box>
     );
   } else if (isGetError) {
-    return <div>{getError}</div>;
+    return <Typography variant="h4">No jobs found!</Typography>
   } else if (isGetSuccess) {
     return (
       <>
@@ -76,17 +76,20 @@ const JobList = ({setCurrentId }) => {
           <Sort sortBy={sortBy} handleSort={handleSort} />
           <Grid container spacing={2}>
             {filterJobs?.map(
-              ({
-                _id,
-                title,
-                client,
-                job_description,
-                address,
-                email,
-                phone_number,
-                created,
-                status,
-              }, i) => (
+              (
+                {
+                  _id,
+                  title,
+                  client,
+                  job_description,
+                  address,
+                  email,
+                  phone_number,
+                  created,
+                  status,
+                },
+                i
+              ) => (
                 <Grid item xs={12} md={6} key={_id}>
                   <Card elevation={2}>
                     <CardHeader
@@ -152,14 +155,29 @@ const JobList = ({setCurrentId }) => {
                         alignItems="center"
                         className={classes.action}
                       >
-                        
-                        <StatusButton status={status} currentId={_id} jobs={jobs} i={i} />
-                          
-                          <CommentIcon
-                            color="primary"
-                            style={{ cursor: "pointer" }}
-                          />
-                        
+                        <StatusButton
+                          status={status}
+                          currentId={_id}
+                          jobs={jobs}
+                          i={i}
+                        />
+                        <div>
+                          <IconButton>
+                            <DeleteOutlinedIcon
+                              color="primary"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => {
+                                deleteJob(_id);
+                              }}
+                            />
+                          </IconButton>
+                          <IconButton>
+                            <CommentIcon
+                              color="primary"
+                              style={{ cursor: "pointer" }}
+                            />
+                          </IconButton>
+                        </div>
                       </Box>
                     </CardActions>
                   </Card>
