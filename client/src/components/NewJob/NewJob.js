@@ -68,12 +68,15 @@ const NewJob = ({ currentId }) => {
       created: "",
       email: "",
       status: "",
+      comments: []
     });
   };
   return (
     <>
       <Container>
-        <Typography className={classes.title} variant="h4">{currentId ? "Edit" : "Add "} a job</Typography>
+        <Typography className={classes.title} gutterBottom variant="h4">
+          {currentId ? "Edit" : "Add "} a job
+        </Typography>
         <form
           onSubmit={handleSubmit}
           className={`${classes.root} ${classes.form}`}

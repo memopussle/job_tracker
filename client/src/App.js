@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { NewJob, Navbar, VerticalNav, JobList, EachJobPage} from "./components/index";
+import { NewJob, Navbar, VerticalNav, JobList, EachJobDetails} from "./components/index";
 import { Grid } from "@material-ui/core";
 import useStyles from "./styles";
 
@@ -43,7 +43,7 @@ const App = () => {
 
             <Route path="/" element={<JobList setCurrentId={setCurrentId} />} />
             <Route path="/addjob" element={<NewJob currentId={currentId} />} />
-            <Route path="/jobs/:id" element={<EachJobPage setCurrentId={setCurrentId} />} />
+            <Route path="/jobs/:id" element={<EachJobDetails setCurrentId={setCurrentId} />} />
           </Routes>
         </Grid>
       </Grid>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  useGetJobsQuery,
-} from "../../features/api/apiSlice";
+import { useGetJobsQuery } from "../../features/api/apiSlice";
 
 import { Typography, Grid, Box, Container } from "@material-ui/core";
 
@@ -22,7 +20,6 @@ const JobList = ({ setCurrentId }) => {
   const classes = useStyles();
   const location = useLocation();
   const { pathname } = location;
-
   const {
     data: jobs,
     isLoading: isGetLoading,

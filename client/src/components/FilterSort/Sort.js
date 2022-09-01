@@ -3,7 +3,7 @@ import { FormControl, MenuItem, InputLabel, Select } from "@material-ui/core";
 
 const Sort = ({handleSort, sortBy}) => {
   return (
-    <FormControl >
+    <FormControl style={{ marginBottom: "2rem" }}>
       <InputLabel>Sort</InputLabel>
       <Select value={sortBy} onChange={handleSort}>
         <MenuItem value="newest">Newest</MenuItem>

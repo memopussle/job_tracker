@@ -40,7 +40,7 @@ const EachJob = ({
   const classes = useStyles();
   const location = useLocation();
   const { data: jobs } = useGetJobsQuery();
-  const [deleteJob] = useDeleteJobsMutation();
+  const [deleteJob] = useDeleteJobsMutation(_id);
 
   return (
     <Card elevation={2}>
@@ -92,23 +92,21 @@ const EachJob = ({
           className={classes.action}
         >
           <StatusButton status={status} currentId={_id} jobs={jobs} />
-          <div>
-            <IconButton
-              onClick={() => {
-                deleteJob(_id);
-              }}
-            >
-              <DeleteOutlinedIcon
-                color="primary"
-                style={{ cursor: "pointer" }}
-              />
-            </IconButton>
-            <Link to={`/jobs/${_id}`}>
-              <IconButton>
-                <CommentIcon color="primary" style={{ cursor: "pointer" }} />
+          {location.pathname !== `/jobs/${_id}` && (
+            <div>
+              <IconButton onClick={() => deleteJob(_id)}>
+                <DeleteOutlinedIcon
+                  color="primary"
+                  style={{ cursor: "pointer" }}
+                />
               </IconButton>
-            </Link>
-          </div>
+              <Link to={`/jobs/${_id}`}>
+                <IconButton>
+                  <CommentIcon color="primary" style={{ cursor: "pointer" }} />
+                </IconButton>
+              </Link>
+            </div>
+          )}
         </Box>
       </CardActions>
     </Card>

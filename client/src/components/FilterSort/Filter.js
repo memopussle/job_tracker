@@ -4,7 +4,7 @@ import { FormControl, MenuItem, InputLabel, Select } from "@material-ui/core";
 const FilterSort = ({ filterBy, handleChange }) => {
 
   return (
-    <FormControl style={{ margin: "0 1rem 0 1rem" }}>
+    <FormControl style={{ margin: "0 1rem 2rem 1rem" }}>
       <InputLabel>Filter</InputLabel>
       <Select value={filterBy} onChange={handleChange}>
         <MenuItem value="all">All</MenuItem>
