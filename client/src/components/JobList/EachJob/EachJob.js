@@ -68,7 +68,7 @@ const EachJob = ({
 
         <Typography variant="body1" component="p">
           Description:
-          {location.pathname !== `/${_id}`
+          {location.pathname !== `/jobs/${_id}`
             ? job_description.slice(0, 100).concat("...(see more)")
             : job_description}
         </Typography>

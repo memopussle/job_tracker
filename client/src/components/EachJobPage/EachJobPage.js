@@ -15,6 +15,7 @@ const EachJobPage = ({ setCurrentId }) => {
     isSuccess: isGetSuccess,
   } = useGetAJobQuery(id);
 
+  console.log(job?._id)
   if (isGetLoading) {
     return <CircularProgress />;
   } else if (isGetError) {
@@ -24,16 +25,16 @@ const EachJobPage = ({ setCurrentId }) => {
       <>
         {job && (
           <EachJob
-            client={job.client}
-            created={job.created}
+            client={job?.client}
+            created={job?.created}
             setCurrentId={setCurrentId}
-            _id={job._id}
-            title={job.title}
-            job_description={job.job_description}
-            phone_number={job.phone_number}
-            address={job.address}
-            email={job.email}
-            status={job.status}
+            _id={job?._id}
+            title={job?.title}
+            job_description={job?.job_description}
+            phone_number={job?.phone_number}
+            address={job?.address}
+            email={job?.email}
+            status={job?.status}
           />
         )}
       </>
