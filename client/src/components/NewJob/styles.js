@@ -11,6 +11,9 @@ export default makeStyles((theme) => ({
     submit: {
       marginTop: "0.5rem",
       marginRight: "0.5rem"
+  },
+  title: {
+      marginTop: "2rem"
     }
 
 }));

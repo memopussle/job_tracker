@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from "react";
 import {
   useGetJobsQuery,
-  useDeleteJobsMutation,
 } from "../../features/api/apiSlice";
 
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-  Grid,
-  Avatar,
-  CardHeader,
-  IconButton,
-  Box,
-  Container,
-} from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { formatDate } from "../../utils/formatDate";
-import CommentIcon from "@material-ui/icons/Comment";
+import { Typography, Grid, Box, Container } from "@material-ui/core";
+
 import useStyles from "./styles";
 import { useLocation } from "react-router-dom";
-import { filterByCategory, sortByDate, Sort, Filter } from "../index";
-import { Link } from "react-router-dom";
-import StatusButton from "../StatusButton.js/StatusButton";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import filterRoute from "../../utils/filterRoute";
+import {
+  filterByCategory,
+  sortByDate,
+  Sort,
+  Filter,
+  filterRoute,
+  EachJob,
+} from "../index";
+
+import { CircularProgress } from "@material-ui/core";
 
 const JobList = ({ setCurrentId }) => {
   const classes = useStyles();
@@ -37,11 +27,8 @@ const JobList = ({ setCurrentId }) => {
     data: jobs,
     isLoading: isGetLoading,
     isError: isGetError,
-    error: getError,
     isSuccess: isGetSuccess,
   } = useGetJobsQuery();
-
-  const [deleteJob] = useDeleteJobsMutation();
 
   //filter and sort
   const [filterBy, setFilterBy] = useState("all");
@@ -63,8 +50,6 @@ const JobList = ({ setCurrentId }) => {
     setSortBy(event.target.value);
   };
 
-  let filteredJobs;
-
   //determine which jobs show depending on the path
   const filterJobLists = filterRoute(pathname, filterJobs);
 
@@ -75,11 +60,15 @@ const JobList = ({ setCurrentId }) => {
       </Box>
     );
   } else if (isGetError) {
-    return <Typography variant="h4" align="center">No jobs found!</Typography>;
+    return (
+      <Typography variant="h4" align="center">
+        No jobs found!
+      </Typography>
+    );
   } else if (isGetSuccess) {
     return (
       <>
-        <Container>
+        <Container className={classes.container}>
           {location.pathname === "/" && (
             <Filter filterBy={filterBy} handleChange={handleChange} />
           )}
@@ -87,113 +76,31 @@ const JobList = ({ setCurrentId }) => {
           <Sort sortBy={sortBy} handleSort={handleSort} />
           <Grid container spacing={2}>
             {filterJobLists?.map(
-              (
-                {
-                  _id,
-                  title,
-                  client,
-                  job_description,
-                  address,
-                  email,
-                  phone_number,
-                  created,
-                  status,
-                },
-                i
-              ) => (
+              ({
+                _id,
+                title,
+                client,
+                job_description,
+                address,
+                email,
+                phone_number,
+                created,
+                status,
+              }) => (
                 <Grid item xs={12} md={6} key={_id}>
-                  <Card elevation={2}>
-                    <CardHeader
-                      avatar={
-                        <Avatar className={classes.avatar}>
-                          {client.slice(0, 1)}
-                        </Avatar>
-                      }
-                      title={client}
-                      subheader={formatDate(created)}
-                      action={
-                        <IconButton aria-label="settings">
-                          <Link to="/addjob">
-                            <MoreVertIcon
-                              onClick={() => setCurrentId(_id)}
-                              color="primary"
-                            />
-                          </Link>
-                        </IconButton>
-                      }
-                    />
-
-                    <CardContent>
-                      <Typography variant="h5" component="h2">
-                        {title}
-                      </Typography>
-
-                      <Typography variant="body1" component="p">
-                        Description:
-                        {location.pathname === "/"
-                          ? job_description
-                              .slice(0, 100)
-                              .concat("...(see more)")
-                          : job_description}
-                      </Typography>
-
-                      <Typography
-                        color="textSecondary"
-                        variant="body2"
-                        component="p"
-                      >
-                        Phone number: {phone_number}
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="body2"
-                        component="p"
-                      >
-                        Address: {address}
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="body2"
-                        component="p"
-                      >
-                        Email: {email}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Box
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        className={classes.action}
-                      >
-                        <StatusButton
-                          status={status}
-                          currentId={_id}
-                          jobs={jobs}
-                          i={i}
-                        />
-                        <div>
-                          <IconButton
-                            onClick={() => {
-                              deleteJob(_id);
-                            }}
-                          >
-                            <DeleteOutlinedIcon
-                              color="primary"
-                              style={{ cursor: "pointer" }}
-                            />
-                          </IconButton>
-
-                          <IconButton>
-                            <CommentIcon
-                              color="primary"
-                              style={{ cursor: "pointer" }}
-                            />
-                          </IconButton>
-                        </div>
-                      </Box>
-                    </CardActions>
-                  </Card>
+                  <EachJob
+                    client={client}
+                    created={created}
+                    setCurrentId={setCurrentId}
+                    _id={_id}
+                    title={title}
+                    job_description={job_description}
+                    phone_number={phone_number}
+                    address={address}
+                    email={email}
+                    status={status}
+                    jobs={jobs}
+                  />
                 </Grid>
               )
             )}

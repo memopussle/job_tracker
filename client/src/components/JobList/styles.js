@@ -4,7 +4,9 @@ export default makeStyles((theme) => ({
   action: {
     width: "100%",
   },
-  avatar: {
-    backgroundColor: "#3f51b5",
+
+  container: {
+    marginTop: "2rem",
   },
+
 }));

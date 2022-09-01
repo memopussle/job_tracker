@@ -19,6 +19,8 @@ const filterRoute = (pathname, filterJobs) => {
     case "/completed":
       filteredJobs = filterJobs.filter((job) => job.status === "completed");
       break;
+    default :
+      filteredJobs = filterJobs;
     }
     return filteredJobs;
 };

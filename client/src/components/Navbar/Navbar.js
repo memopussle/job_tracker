@@ -11,6 +11,7 @@ import {
 
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { Link } from "react-router-dom";
 
 import useStyles from "./styles.js";
 
@@ -42,13 +43,27 @@ const Navbar = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>All</MenuItem>
-            <MenuItem onClick={handleClose}>Scheduled</MenuItem>
-            <MenuItem onClick={handleClose}>Active</MenuItem>
-            <MenuItem onClick={handleClose}>Invoicing</MenuItem>
-            <MenuItem onClick={handleClose}>To priced</MenuItem>
-            <MenuItem onClick={handleClose}>Completed</MenuItem>
-            <MenuItem onClick={handleClose}>Add a new job</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/">
+              All
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/scheduled">
+              Scheduled
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/active">
+              Active
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/invoicing">
+              Invoicing
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/topriced">
+              To priced
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/completed">
+              Completed
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/addjob">
+              Add a new job
+            </MenuItem>
           </Menu>
 
           <Typography variant="h6" className={classes.title}>

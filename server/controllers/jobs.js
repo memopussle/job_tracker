@@ -2,6 +2,7 @@ import Job from "../models/jobs.js";
 import express from "express";
 import mongoose from "mongoose";
 
+
 const router = express.Router();
 
 // get all the jobs
@@ -76,3 +77,20 @@ export const deleteJob = async (req, res) => {
 
   res.send({ message: "Post deleted sucessfully" });
 };
+
+// Get a single job
+export const getAJob = async (req, res) => {
+  const { id: _id } = req.params;
+
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(400).send({ message: "id provided is invalid" });
+  }
+
+  const JobById = await Job.findById(_id);
+  if (!JobById) {
+    return res.status(404).send({ message: "id not found" });
+  }
+
+  return res.status(200).send(JobById);
+}

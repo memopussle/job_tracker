@@ -35,6 +35,9 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Job"],
     }),
+    getAJob: builder.query({
+      query: (id) => `/jobs/${id}`,
+    }),
   }),
 });
-export const { useGetJobsQuery, useAddJobsMutation, useUpdateJobsMutation, useDeleteJobsMutation} = apiSlice;
+export const { useGetJobsQuery, useAddJobsMutation, useGetAJobQuery, useUpdateJobsMutation, useDeleteJobsMutation} = apiSlice;
