@@ -38,6 +38,15 @@ export const apiSlice = createApi({
     getAJob: builder.query({
       query: (id) => `/jobs/${id}`,
     }),
+
+    addComments: builder.mutation({
+      query: (comment, id) => ({
+        url: `/jobs/${id}/comments`,
+        method: "POST",
+        body: comment,
+      }),
+      invalidatesTags: ["Job"],
+    }),
   }),
 });
-export const { useGetJobsQuery, useAddJobsMutation, useGetAJobQuery, useUpdateJobsMutation, useDeleteJobsMutation} = apiSlice;
+export const { useGetJobsQuery,useAddCommentsMutation, useAddJobsMutation, useGetAJobQuery, useUpdateJobsMutation, useDeleteJobsMutation} = apiSlice;

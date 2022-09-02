@@ -43,7 +43,14 @@ const App = () => {
 
             <Route path="/" element={<JobList setCurrentId={setCurrentId} />} />
             <Route path="/addjob" element={<NewJob currentId={currentId} />} />
-            <Route path="/jobs/:id" element={<EachJobDetails setCurrentId={setCurrentId} />} />
+            <Route
+              path="/jobs/:id"
+              element={<EachJobDetails setCurrentId={setCurrentId} />}
+            />
+            <Route
+              path="/jobs/:id/comments"
+              element={<EachJobDetails setCurrentId={setCurrentId} />}
+            />
           </Routes>
         </Grid>
       </Grid>

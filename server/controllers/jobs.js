@@ -27,6 +27,7 @@ export const createJob = async (req, res) => {
     created,
     email,
     status,
+    comments,
   } = req.body;
 
   const newJob = new Job({
@@ -38,6 +39,7 @@ export const createJob = async (req, res) => {
     created,
     email,
     status,
+    comments,
   });
 
   try {
@@ -95,21 +97,19 @@ export const getAJob = async (req, res) => {
 };
 
 // create a comment
-export const commentJob = async(req, res) => {
-  const comment = new Comment(req.body);
+export const commentJob = async (req, res) => {
   const { id: _id} = req.params;
+  const value = req.body;
+  console.log(value);
+  const job = await Job.findById(_id);
 
-  // SAVE INSTANCE OF Comment MODEL TO DB
-   try {
-     await comment.save();
-     const job = Job.findById(_id); //find the job
+  job.comments.unshift(value);
 
-     job.comments.unshift(comment);
-     const newJob = job.save();
+  const updatedJob = await Job.findByIdAndUpdate(_id, job, {
+    new: true,
+  });
 
-    res.status(201).send(newJob);
-  } catch (error) {
-    res.status(409).send({ message: error.message });
-  }
- 
+  res.json(updatedJob);
 };
+
+export default router;

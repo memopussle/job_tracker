@@ -42,7 +42,7 @@ const EachJobDetails = ({ setCurrentId }) => {
             )}
           </Grid>
           <Grid item xs={12}>
-            <CommentSection job={job} />
+            <CommentSection job={job} _id={job?._id} />
           </Grid>
         </Grid>
       </Container>
