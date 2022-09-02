@@ -1,6 +1,7 @@
 import Job from "../models/jobs.js";
 import express from "express";
 import mongoose from "mongoose";
+import Comment from "../models/comments.js";
 
 const router = express.Router();
 
@@ -93,21 +94,22 @@ export const getAJob = async (req, res) => {
   return res.status(200).send(JobById);
 };
 
-// post a comment
-export const commentJob = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { value } = req.body;
-    console.log(value);
+// create a comment
+export const commentJob = async(req, res) => {
+  const comment = new Comment(req.body);
+  const { id: _id} = req.params;
 
-    const job = await Job.findById(id);
+  // SAVE INSTANCE OF Comment MODEL TO DB
+   try {
+     await comment.save();
+     const job = Job.findById(_id); //find the job
 
-    job.comments.push("hello");
+     job.comments.unshift(comment);
+     const newJob = job.save();
 
-    const updatedJob = await Job.findByIdAndUpdate(id, job, { new: true });
-
-    res.status(201).send(updatedJob);
+    res.status(201).send(newJob);
   } catch (error) {
-    return res.send({ message: `${error}` });
+    res.status(409).send({ message: error.message });
   }
+ 
 };
