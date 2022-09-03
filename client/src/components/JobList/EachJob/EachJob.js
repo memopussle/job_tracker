@@ -36,6 +36,7 @@ const EachJob = ({
   address,
   email,
   status,
+  comments
 }) => {
   const classes = useStyles();
   const location = useLocation();
@@ -107,6 +108,7 @@ const EachJob = ({
               </Link>
             </div>
           )}
+          
         </Box>
       </CardActions>
     </Card>

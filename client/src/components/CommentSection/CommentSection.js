@@ -16,6 +16,7 @@ import useStyles from "./styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const CommentSection = () => {
+
   const classes = useStyles();
   const { id } = useParams();
   const [commentIndex, setCommentIndex] = useState();
@@ -26,6 +27,7 @@ const CommentSection = () => {
 
   const [comments, setComments] = useState([]);
 
+
   useEffect(() => {
     //find the comment based on clicked index
     if (comments.length !== 0 && commentIndex >= 0) {
@@ -33,7 +35,7 @@ const CommentSection = () => {
       setComment({
         ...comment,
         comment: chosenComment.comment,
-        index: commentIndex
+        index: commentIndex,
       });
     }
   }, [commentIndex, comments.length, comments.comments]);
@@ -42,7 +44,7 @@ const CommentSection = () => {
     setComment({
       comment: "",
       createdAt: new Date(Date.now()),
-     index: null
+      index: null,
     });
   };
 
@@ -61,7 +63,6 @@ const CommentSection = () => {
         } else {
           setComments(data);
           console.log("Successfully addedd!");
-  
         }
       });
   };
@@ -81,22 +82,35 @@ const CommentSection = () => {
           console.log(data.error);
         } else {
           setComments(data);
-     
         }
       });
   };
 
+  //get comments 
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch(
+          `http://localhost:5000/jobs/${id}`
+        );
+        const data = await response.json();
+        setComments(data)
+     
+      };
+      fetchData();
+    }, []);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setComment(comment);
-    console.log(commentIndex)
-    
+
     if (commentIndex >= 0 && comment.index !== null) {
       updateComment();
     } else {
       postData();
+      clear()
     }
-    
   };
 
   const handleChange = (e) => {
@@ -105,7 +119,7 @@ const CommentSection = () => {
 
   return (
     <>
-      <Typography variant="h5">Take Notes</Typography>
+      <Typography variant="h5" className={classes.title}>Take Notes</Typography>
       <Grid container>
         <Grid item xs={12}>
           <form onSubmit={handleSubmit}>

@@ -6,7 +6,7 @@ import {
   updateJob,
   getAJob,
   createComment,
-  updateComment
+  updateComment,
 } from "../controllers/jobs.js";
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.post("/", createJob);
 router.patch("/:id", updateJob);
 router.delete("/:id", deleteJob);
 router.get("/:id", getAJob);
-router.post("/:id/comments", createComment)
+router.post("/:id/comments", createComment);
 router.patch("/:id/comments", updateComment);
 
 export default router;

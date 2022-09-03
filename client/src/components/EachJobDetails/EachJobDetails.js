@@ -2,9 +2,8 @@ import { CircularProgress } from "@material-ui/core";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetAJobQuery } from "../../features/api/apiSlice";
-import { EachJob, CommentSection} from "../index";
-import { Typography, Grid, Container} from "@material-ui/core";
-
+import { EachJob, CommentSection } from "../index";
+import { Typography, Grid, Container } from "@material-ui/core";
 
 const EachJobDetails = ({ setCurrentId }) => {
   const { id } = useParams();
@@ -15,7 +14,6 @@ const EachJobDetails = ({ setCurrentId }) => {
     isError: isGetError,
     isSuccess: isGetSuccess,
   } = useGetAJobQuery(id);
-
 
   if (isGetLoading) {
     return <CircularProgress />;
@@ -38,6 +36,7 @@ const EachJobDetails = ({ setCurrentId }) => {
                 address={job?.address}
                 email={job?.email}
                 status={job?.status}
+                comments={job?.comments}
               />
             )}
           </Grid>

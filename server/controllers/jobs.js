@@ -87,13 +87,15 @@ export const getAJob = async (req, res) => {
     return res.status(400).send({ message: "id provided is invalid" });
   }
 
-  const JobById = await Job.findById(_id);
+  const JobById = await Job.findById(_id).populate("comments");
   if (!JobById) {
     return res.status(404).send({ message: "id not found" });
   }
 
   return res.status(200).send(JobById);
 };
+
+
 
 // create a comment
 export const createComment = async (req, res) => {
@@ -122,7 +124,6 @@ export const updateComment = async (req, res) => {
 
   //find the comment in the job
   const chosenComment = job.comments[index];
-console.log(chosenComment)
   //changing old comment value to new comment value
   chosenComment.comment = newComment.comment;
   chosenComment.createdAt = newComment.createdAt;
@@ -133,8 +134,9 @@ console.log(chosenComment)
     { ...job, id }, // update the post with the id
     { new: true }
   );
-  console.log(updatedJob);
+
   res.send(updatedJob).status;
 };
+
 
 export default router;

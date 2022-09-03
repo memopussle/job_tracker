@@ -9,7 +9,6 @@ const App = () => {
   const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
 
-  console.log(currentId);
   const pathNames = [
     "/",
     "/scheduled",

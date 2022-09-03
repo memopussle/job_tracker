@@ -83,6 +83,7 @@ const JobList = ({ setCurrentId }) => {
                 phone_number,
                 created,
                 status,
+                comments
               }) => (
                 <Grid item xs={12} md={6} key={_id}>
                   <EachJob
@@ -97,6 +98,7 @@ const JobList = ({ setCurrentId }) => {
                     email={email}
                     status={status}
                     jobs={jobs}
+                    comments={comments}
                   />
                 </Grid>
               )

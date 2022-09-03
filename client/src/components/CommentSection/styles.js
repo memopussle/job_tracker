@@ -11,5 +11,9 @@ export default makeStyles(() => ({
   button: {
     marginTop: "1rem",
     marginRight: "1rem"
+  },
+  title: {
+    marginTop: "2rem",
+    marginBottom: "1rem"
   }
 }));
