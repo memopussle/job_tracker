@@ -12,6 +12,7 @@ const jobSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  
   comments: Object,
 
 });

@@ -30,14 +30,14 @@ const NewJob = ({ currentId }) => {
     if (chosenJob) {
       setNewJob(chosenJob);
     }
-  }, []);
+  }, [chosenJob]);
   const [newJob, setNewJob] = useState({
     client: "",
     title: "",
     job_description: "",
     phone_number: "",
     address: "",
-    created: "",
+   created: "",
     email: "",
     status: "",
   });
@@ -136,7 +136,7 @@ const NewJob = ({ currentId }) => {
               <Box display="flex" flexDirection="column">
                 <TextField
                   name="created"
-                  label="Created at"
+                  label="Start date"
                   type="datetime-local"
                   InputLabelProps={{
                     shrink: true,

@@ -7,7 +7,7 @@ const router = express.Router();
 // get all the jobs
 export const getJobs = async (req, res) => {
   try {
-    const jobsList = await Job.find();
+    const jobsList = await Job.find().populate("comments");
 
     res.status(200).send(jobsList); //json = send
   } catch (error) {
@@ -96,11 +96,10 @@ export const getAJob = async (req, res) => {
 };
 
 // create a comment
-export const commentJob = async (req, res) => {
+export const createComment = async (req, res) => {
   const { id: _id } = req.params;
-
   const value = req.body;
-  console.log(value)
+
   const job = await Job.findById(_id);
   job.comments.unshift(value);
 
@@ -108,9 +107,21 @@ export const commentJob = async (req, res) => {
     new: true,
   });
   //save job
-  await updatedJob.save()
+  const newUpdatedJob = await updatedJob.save();
+   console.log(newUpdatedJob)
 
-  res.json(updatedJob);
+  res.json(newUpdatedJob);
 };
+
+//update a comment
+export const updateComment = async (req, res) => {
+  const comment = req.body;
+  console.log(comment)
+ 
+  // find the comment
+  
+
+};
+
 
 export default router;
