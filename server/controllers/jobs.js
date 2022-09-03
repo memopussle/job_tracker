@@ -1,7 +1,6 @@
 import Job from "../models/jobs.js";
 import express from "express";
 import mongoose from "mongoose";
-import Comment from "../models/comments.js";
 
 const router = express.Router();
 
@@ -98,16 +97,18 @@ export const getAJob = async (req, res) => {
 
 // create a comment
 export const commentJob = async (req, res) => {
-  const { id: _id} = req.params;
-  const value = req.body;
-  console.log(value);
-  const job = await Job.findById(_id);
+  const { id: _id } = req.params;
 
+  const value = req.body;
+  console.log(value)
+  const job = await Job.findById(_id);
   job.comments.unshift(value);
 
   const updatedJob = await Job.findByIdAndUpdate(_id, job, {
     new: true,
   });
+  //save job
+  await updatedJob.save()
 
   res.json(updatedJob);
 };

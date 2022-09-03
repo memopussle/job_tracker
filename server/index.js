@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import jobsRoutes from "./routes/jobs.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 dotenv.config();
@@ -14,6 +16,11 @@ app.use(cors());
 
 
 app.use("/jobs", jobsRoutes);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname + "/public")));
+
 
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;

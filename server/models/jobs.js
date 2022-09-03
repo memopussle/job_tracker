@@ -12,7 +12,8 @@ const jobSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
-  comments: { type: [String], default: []}
+  comments: Object,
+
 });
 
 const Job = mongoose.model("Job", jobSchema);
