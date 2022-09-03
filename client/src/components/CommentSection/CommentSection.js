@@ -49,7 +49,7 @@ const CommentSection = () => {
   };
 
   const postData = async () => {
-    await fetch(`http://localhost:5000/jobs/${id}/comments`, {
+    await fetch(`https://job-idenitifier.herokuapp.com/jobs/${id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const CommentSection = () => {
 
   //update cmment
   const updateComment = async () => {
-    await fetch(`http://localhost:5000/jobs/${id}/comments`, {
+    await fetch(`https://job-idenitifier.herokuapp.com/jobs/${id}/comments`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const CommentSection = () => {
     useEffect(() => {
       const fetchData = async () => {
         const response = await fetch(
-          `http://localhost:5000/jobs/${id}`
+          `https://job-idenitifier.herokuapp.com/jobs/${id}`
         );
         const data = await response.json();
         setComments(data)
