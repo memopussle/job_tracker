@@ -1,11 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles((theme) => ({
+export default makeStyles(() => ({
 
   avatar: {
     backgroundColor: "#115293",
   },
   commentCard: {
-    marginBottom: "1rem"
+    marginTop: "1rem"
+  },
+  button: {
+    marginTop: "1rem",
+    marginRight: "1rem"
   }
 }));

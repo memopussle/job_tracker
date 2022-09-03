@@ -108,20 +108,33 @@ export const createComment = async (req, res) => {
   });
   //save job
   const newUpdatedJob = await updatedJob.save();
-   console.log(newUpdatedJob)
-
   res.json(newUpdatedJob);
 };
 
 //update a comment
 export const updateComment = async (req, res) => {
-  const comment = req.body;
-  console.log(comment)
- 
-  // find the comment
-  
+  const newComment = req.body;
+  const { id } = req.params;
 
+  const index = newComment.index;
+  // find the job
+  const job = await Job.findById(id);
+
+  //find the comment in the job
+  const chosenComment = job.comments[index];
+console.log(chosenComment)
+  //changing old comment value to new comment value
+  chosenComment.comment = newComment.comment;
+  chosenComment.createdAt = newComment.createdAt;
+  chosenComment.index = newComment.index;
+
+  const updatedJob = await Job.findByIdAndUpdate(
+    id,
+    { ...job, id }, // update the post with the id
+    { new: true }
+  );
+  console.log(updatedJob);
+  res.send(updatedJob).status;
 };
-
 
 export default router;

@@ -18,13 +18,11 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 const CommentSection = () => {
   const classes = useStyles();
   const { id } = useParams();
-  const [count, setCount] = useState(0);
   const [commentIndex, setCommentIndex] = useState();
   const [comment, setComment] = useState({
     comment: "",
     createdAt: new Date(Date.now()),
   });
-
 
   const [comments, setComments] = useState([]);
 
@@ -32,15 +30,19 @@ const CommentSection = () => {
     //find the comment based on clicked index
     if (comments.length !== 0 && commentIndex >= 0) {
       const chosenComment = comments?.comments[commentIndex];
-      setComment({ ...comment, comment: chosenComment.comment });
+      setComment({
+        ...comment,
+        comment: chosenComment.comment,
+        index: commentIndex
+      });
     }
-    console.log(comment)
-  }, [commentIndex, comments.length,comments.comments]);
+  }, [commentIndex, comments.length, comments.comments]);
 
   const clear = () => {
     setComment({
-      ...comment,
       comment: "",
+      createdAt: new Date(Date.now()),
+     index: null
     });
   };
 
@@ -59,7 +61,7 @@ const CommentSection = () => {
         } else {
           setComments(data);
           console.log("Successfully addedd!");
-          clear();
+  
         }
       });
   };
@@ -79,28 +81,22 @@ const CommentSection = () => {
           console.log(data.error);
         } else {
           setComments(data);
-          console.log("Successfully edited!");
-          clear();
+     
         }
       });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setCount((prevCount) => prevCount++);
-
     setComment(comment);
-
-    if (commentIndex) {
-      console.log("updated");
-      console.log(commentIndex)
+    console.log(commentIndex)
+    
+    if (commentIndex >= 0 && comment.index !== null) {
       updateComment();
-  
     } else {
       postData();
-      console.log("created!")
     }
-  
+    
   };
 
   const handleChange = (e) => {
@@ -123,7 +119,7 @@ const CommentSection = () => {
               onChange={handleChange}
             />
             <Button
-              style={{ marginTop: "1rem" }}
+              className={classes.button}
               size="large"
               disabled={!comment}
               variant="contained"
@@ -132,12 +128,21 @@ const CommentSection = () => {
             >
               Submit
             </Button>
+            <Button
+              className={classes.button}
+              size="large"
+              variant="outlined"
+              color="primary"
+              onClick={clear}
+            >
+              Clear
+            </Button>
           </form>
         </Grid>
         <Grid item xs={12}>
           {comments.length !== 0 &&
             comments?.comments.map((comment, i) => (
-              <>
+              <div key={i}>
                 <Card elevation={2} className={classes.commentCard}>
                   <CardHeader
                     avatar={<Avatar className={classes.avatar}>R</Avatar>}
@@ -158,7 +163,7 @@ const CommentSection = () => {
                     ></Typography>
                   </CardContent>
                 </Card>
-              </>
+              </div>
             ))}
         </Grid>
       </Grid>
