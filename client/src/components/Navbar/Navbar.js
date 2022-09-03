@@ -67,9 +67,8 @@ const Navbar = () => {
           </Menu>
 
           <Typography variant="h6" className={classes.title}>
-            Job Tracker
+            Tradify
           </Typography>
-
           <div>
             <IconButton color="inherit">
               <AccountCircle />

@@ -154,8 +154,9 @@ const CommentSection = () => {
           </form>
         </Grid>
         <Grid item xs={12}>
-          {comments.length !== 0 &&
-            comments?.comments.map((comment, i) => (
+        
+          {comments.length !== 0 && 
+            comments?.comments?.map((comment, i) => (
               <div key={i}>
                 <Card elevation={2} className={classes.commentCard}>
                   <CardHeader
@@ -166,11 +167,11 @@ const CommentSection = () => {
                       </IconButton>
                     }
                     title="Ryan"
-                    subheader={formatDate(comment.createdAt)}
+                    subheader={formatDate(comment?.createdAt)}
                   />
 
                   <CardContent>
-                    <Typography variant="body1">{comment.comment}</Typography>
+                    <Typography variant="body1">{comment?.comment}</Typography>
                     <Typography
                       variant="body2"
                       color="textSecondary"

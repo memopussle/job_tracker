@@ -7,8 +7,7 @@ const router = express.Router();
 // get all the jobs
 export const getJobs = async (req, res) => {
   try {
-    const jobsList = await Job.find().populate("comments");
-
+    const jobsList = await Job.find();
     res.status(200).send(jobsList); //json = send
   } catch (error) {
     res.status(404).send({ message: error.message });
@@ -52,8 +51,7 @@ export const createJob = async (req, res) => {
 
 //update a job
 export const updateJob = async (req, res) => {
-  const { id: _id } = req.params; // rename id -> _id
-
+  const { id: _id } = req.params; 
   const job = req.body;
 
   //if id is not valid
@@ -87,7 +85,7 @@ export const getAJob = async (req, res) => {
     return res.status(400).send({ message: "id provided is invalid" });
   }
 
-  const JobById = await Job.findById(_id).populate("comments");
+  const JobById = await Job.findById(_id);
   if (!JobById) {
     return res.status(404).send({ message: "id not found" });
   }
