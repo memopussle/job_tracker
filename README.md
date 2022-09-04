@@ -70,7 +70,7 @@ should be able to:
 + Filter and sort the list of jobs.
 + Click on a job in the list to view their details and add/edit notes for that job.
 + Change the status of a job.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ### Built With
 
@@ -199,4 +199,3 @@ Thu Giang - xanhtham.cuc@gmail.com
 
 Project Link: [Tradify](https://github.com/memopussle/job_tracker)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
