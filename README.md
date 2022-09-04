@@ -29,18 +29,18 @@
       </ul>
     </li>
      <li>
-      <a href="#data-stored">Summary about data store</a>
+      <a href="#data-store-selection">Summary about data store</a>
       <ul>
-        <li><a href="#data-selection">Data Store Selection</a></li>
+        <li><a href="#Summary-about-data-store">Data Store Selection</a></li>
         <li><a href="#explanation">Explanation</a></li>
-        <li><a href="#folder-structure">Back-end Folder Structure</a></li>
+        <li><a href="#Back-end-folder-structure">Back-end Folder Structure</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#installation">Test endpoints</a></li>
+        <li><a href="#Test-Endpoint">Test endpoints</a></li>
       </ul>
     </li>
 
