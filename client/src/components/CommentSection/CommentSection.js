@@ -16,7 +16,6 @@ import useStyles from "./styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const CommentSection = () => {
-
   const classes = useStyles();
   const { id } = useParams();
   const [commentIndex, setCommentIndex] = useState();
@@ -26,7 +25,7 @@ const CommentSection = () => {
   });
 
   const [comments, setComments] = useState([]);
-
+  console.log(comments);
 
   useEffect(() => {
     //find the comment based on clicked index
@@ -53,6 +52,7 @@ const CommentSection = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(comment),
     })
@@ -86,20 +86,17 @@ const CommentSection = () => {
       });
   };
 
-  //get comments 
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await fetch(
-          `https://job-idenitifier.herokuapp.com/jobs/${id}`
-        );
-        const data = await response.json();
-        setComments(data)
-     
-      };
-      fetchData();
-    }, []);
-
-
+  //get comments
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://job-idenitifier.herokuapp.com/jobs/${id}`
+      );
+      const data = await response.json();
+      setComments(data);
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,7 +106,6 @@ const CommentSection = () => {
       updateComment();
     } else {
       postData();
-      clear()
     }
   };
 
@@ -119,7 +115,9 @@ const CommentSection = () => {
 
   return (
     <>
-      <Typography variant="h5" className={classes.title}>Take Notes</Typography>
+      <Typography variant="h5" className={classes.title}>
+        Take Notes
+      </Typography>
       <Grid container>
         <Grid item xs={12}>
           <form onSubmit={handleSubmit}>
@@ -154,8 +152,7 @@ const CommentSection = () => {
           </form>
         </Grid>
         <Grid item xs={12}>
-        
-          {comments.length !== 0 && 
+          {comments.length !== 0 &&
             comments?.comments?.map((comment, i) => (
               <div key={i}>
                 <Card elevation={2} className={classes.commentCard}>

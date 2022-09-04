@@ -7,8 +7,7 @@
 
   <h3 align="center">Tradify</h3>
  <p align="center">
- <strong><a href="https://github.com/othneildrew/Best-README-Template">View Demo<a></strong>
- •
+
   <strong><a href="https://github.com/memopussle/job_tracker">View Source Code<a></strong>
  •
 <strong><a href="https://job-idenitifier.herokuapp.com/">View Live Site</a></strong>
@@ -28,6 +27,7 @@
       <ul>
        <li><a href="#requirements">Requirements</a></li>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Diagram</a></li>
       </ul>
     </li>
      <li>
@@ -35,16 +35,17 @@
       <ul>
         <li><a href="#data-selection">Data Store Selection</a></li>
         <li><a href="#explanation">Explanation</a></li>
+        <li><a href="#folder-structure">Back-end Folder Structure</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#installation">Test endpoints</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+
  
   </ol>
 </details>
@@ -60,139 +61,136 @@ This is an assignment from Fergus - A Job Portal where tradies can keep track of
 - Unique job identifier.
 - Status: one of "scheduled", "active", "invoicing", “to priced” or “completed”.
 - Creation date and time.
-- General information like name and contact details of the client. The tradie can also make
+
+ General information like name and contact details of the client. The tradie can also make
 notes for each job. A job can have any number of notes associated with them. The tradie
 should be able to:
-  1. Filter and sort the list of jobs.
-  2. Click on a job in the list to view their details and add/edit notes for that job.
-  3. Change the status of a job.
+
++ Filter and sort the list of jobs.
++ Click on a job in the list to view their details and add/edit notes for that job.
++ Change the status of a job.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This application is built with:
+ 
+#### Front-end
+- React/JavaScript
 
-- [![Next][next.js]][next-url]
-- [![React][react.js]][react-url]
-- [![Vue][vue.js]][vue-url]
-- [![Angular][angular.io]][angular-url]
-- [![Svelte][svelte.dev]][svelte-url]
-- [![Laravel][laravel.com]][laravel-url]
-- [![Bootstrap][bootstrap.com]][bootstrap-url]
-- [![JQuery][jquery.com]][jquery-url]
+#### Back-end
+- NodeJS (logic written by JavaScript)
+- Express
+- MongoDB ( NoSQL database)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+#### Other dependencies
+
+- React-router
+- Material UI
+- redux-toolkit
+
+
+### Diagram
+
+![Diagram](/diagram/diagram.png)
+
+| Endpoints    | Method  | Usage|
+| ------------- | ------------- | -------- |
+| /jobs       | GET | Show all the jobs available         |
+| /jobs/:id      | GET      | Get each job using an id specified  |
+| /jobs     | POST      | Create a job  |
+| /jobs/:id     | DELETE   | Delete a job  |
+| /jobs/:id     | PATCH   | Edit a job  |
+| /jobs/:id/comments     | POST  | Create a comment for each job  |
+| /jobs/:id/comments     | PATCH  | Update a comment  |
+
+
+<!-- data store Summary --->
+## Summary about data store
+ 
+### Data Store Selection
+
+I use MongoDB as the database and AWS cloud services (provided by MongoDB) for this project. 
+
+MongoDB offers: 
+- Flexibility
+- Scalability (horizontal scaling)
+- High Performance 
+
+### Explanation
+
+The reason is that MongoDB is performance, scalability, flexibility and an accessible environment. MongoDB is almost 100 times faster than a traditional database; hence the user is more likely to receive the content/data faster. MongoDB can perform well with a large data volume, allowing users to insert thousands of records in a second. Also, MongoDB has a feature called horizontal scaling. This feature will enable unlimited comments to be added to each post with easy management. SQL database is way more difficult when you have to add each column for each comment, which can end up being hundreds of columns for 1 job (1 row) and making data management very difficult. 
+
+For a professionally built application, the ability to store a large amount of data and easy management are essential. For example, you can easily add more features (show how many jobs a tradie has done, offer financial management, suggestions...). For the back-end, you can easily add more fields on top of the document, more collections to the database (finance management, etc), and users can make any number of notes associated with each job. I also use React (JavaScript framework) for the front end, which pairs up nicely with MongoDB and makes it very easy to scale up this project in the future. 
+
+
+### Back-end folder structure
+
+- The logic of back-end is written in JavaScript, with back-end JavScript environment (NodeJS), and data is stored in MongoDB. 
+
+
+![Back-end structure](/diagram/folder-structur.png)
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is the instruction on how to run this project locally:
 
-### Prerequisites
+1. Clone the project
 
-This is an example of how to list things you need to use the software and how to install them.
+```sh
+git clone https://github.com/memopussle/job_tracker.git
+```
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+2. Install npm package on client folder
 
-### Installation
+```sh
+cd client
+npm install
+```
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+3. Install npm package on server folder
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+```sh
+cd server
+npm install
+```
+4. In server folder, add your own MongoDB Atlas link in .env file (example for env setup can be found in .env.example):
 
-<!-- USAGE EXAMPLES -->
+```sh
+PORT = YOUR_PORT
+CONNECTION_URL = MONGODB_ATLAS_URL
+```
 
-## Usage
+5. Open http://localhost:3000 to see the project.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+## Test Endpoint
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+You can test endpoints in Insomnia or other testing and validating alternatives (Postman, Swagger UI, Paw etc). 
 
-<!-- ROADMAP -->
 
-## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-  - [ ] Chinese
-  - [ ] Spanish
+- Use this base URL: https://job-idenitifier.herokuapp.com and add either one of the endpoints below: 
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+| Endpoints    | Method  | Usage|
+| ------------- | ------------- | -------- |
+| /jobs       | GET | Show all the jobs available         |
+| /jobs/:id      | GET      | Get each job using an id specified  |
+| /jobs     | POST      | Create a job  |
+| /jobs/:id     | DELETE   | Delete a job  |
+| /jobs/:id     | PATCH   | Edit a job  |
+| /jobs/:id/comments     | POST  | Create a comment for each job  |
+| /jobs/:id/comments     | PATCH  | Update a comment  |
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Thu Giang - xanhtham.cuc@gmail.com 
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-- [Malven's Grid Cheatsheet](https://grid.malven.co/)
-- [Img Shields](https://shields.io)
-- [GitHub Pages](https://pages.github.com)
-- [Font Awesome](https://fontawesome.com)
-- [React Icons](https://react-icons.github.io/react-icons/search)
+Project Link: [Tradify](https://github.com/memopussle/job_tracker)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

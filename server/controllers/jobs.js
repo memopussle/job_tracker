@@ -7,7 +7,7 @@ const router = express.Router();
 // get all the jobs
 export const getJobs = async (req, res) => {
   try {
-    const jobsList = await Job.find();
+    const jobsList = await Job.find().populate("comments");
     res.status(200).send(jobsList); //json = send
   } catch (error) {
     res.status(404).send({ message: error.message });
@@ -85,7 +85,7 @@ export const getAJob = async (req, res) => {
     return res.status(400).send({ message: "id provided is invalid" });
   }
 
-  const JobById = await Job.findById(_id);
+  const JobById = await Job.findById(_id).populate("comments");
   if (!JobById) {
     return res.status(404).send({ message: "id not found" });
   }
@@ -116,24 +116,34 @@ export const updateComment = async (req, res) => {
   const newComment = req.body;
   const { id } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ message: "id provided is invalid" });
+  }
+
   const index = newComment.index;
   // find the job
   const job = await Job.findById(id);
 
   //find the comment in the job
   const chosenComment = job.comments[index];
+
   //changing old comment value to new comment value
   chosenComment.comment = newComment.comment;
   chosenComment.createdAt = newComment.createdAt;
   chosenComment.index = newComment.index;
 
-  const updatedJob = await Job.findByIdAndUpdate(
-    id,
-    { ...job, id }, // update the post with the id
-    { new: true }
-  );
+  try {
+     const updatedJob = await Job.findByIdAndUpdate(
+       id,
+       { ...job, id },
+       { new: true }
+     );
 
-  res.send(updatedJob).status;
+     res.send(updatedJob).status;
+  } catch(err) {
+       res.send({message: "Jobs can't be loaded"})
+  }
+ 
 };
 
 

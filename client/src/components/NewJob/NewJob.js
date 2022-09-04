@@ -40,6 +40,7 @@ const NewJob = ({ currentId }) => {
    created: "",
     email: "",
     status: "",
+    comments: []
   });
   const [addJob] = useAddJobsMutation(newJob);
   const handleChange = (e) => {
