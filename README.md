@@ -11,8 +11,6 @@
   <strong><a href="https://github.com/memopussle/job_tracker">View Source Code<a></strong>
  •
 <strong><a href="https://job-idenitifier.herokuapp.com/">View Live Site</a></strong>
-•
-<strong><a href="https://job-idenitifier.herokuapp.com/jobs">View Data</a></strong>
   
  </p>
 
@@ -53,6 +51,9 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+![Home page](/diagram/tradify-homepage.PNG)
+![Add a job](/diagram/addjob.PNG)
+![Comment page](/diagram/cmments.PNG)
 
 ### Requirements
 
@@ -169,8 +170,13 @@ CONNECTION_URL = MONGODB_ATLAS_URL
 
 ## Test Endpoint
 
-You can test endpoints in Insomnia or other testing and validating alternatives (Postman, Swagger UI, Paw etc). 
+You can test endpoints in Insomnia or other testing and validating alternatives (Postman, Swagger UI, Paw etc). Here are screenshots of how endpoins results look like:
 
+![Get all jobs](/diagram/getjobs.PNG)
+
+![Get a job](/diagram/geteachjob.PNG)
+
+![Post a comment](/diagram/postcomment.PNG)
 
 
 - Use this base URL: https://job-idenitifier.herokuapp.com and add either one of the endpoints below: 
