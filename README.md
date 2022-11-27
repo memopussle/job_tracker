@@ -10,7 +10,7 @@
 
   <strong><a href="https://github.com/memopussle/job_tracker">View Source Code<a></strong>
  •
-<strong><a href="https://job-idenitifier.herokuapp.com/">View Live Site</a></strong>
+<strong><a href="https://job-tracker.onrender.com/">View Live Site</a></strong>
   
  </p>
 
