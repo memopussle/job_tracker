@@ -69,7 +69,7 @@ const CommentSection = () => {
 
   //update cmment
   const updateComment = async () => {
-    await fetch(`https://job-idenitifier.herokuapp.com/jobs/${id}/comments`, {
+    await fetch(`https://job-backend.onrender.com/jobs/${id}/comments`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const CommentSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://job-idenitifier.herokuapp.com/jobs/${id}`
+        `https://job-backend.onrender.com/jobs/${id}`
       );
       const data = await response.json();
       setComments(data);

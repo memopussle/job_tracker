@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "apiSlice",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://job-idenitifier.herokuapp.com",
+    baseUrl: "https://job-backend.onrender.com",
   }),
   tagTypes: ["Job"],
   endpoints: (builder) => ({

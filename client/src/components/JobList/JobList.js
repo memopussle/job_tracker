@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useGetJobsQuery } from "../../features/api/apiSlice";
-
 import { Typography, Grid, Box, Container } from "@material-ui/core";
 
 import useStyles from "./styles";
